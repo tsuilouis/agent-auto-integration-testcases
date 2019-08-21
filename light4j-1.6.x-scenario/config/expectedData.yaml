@@ -1,0 +1,29 @@
+registryItems:
+  applications:
+    - {light4j-petstore: nq 0}
+  instances:
+    - {light4j-petstore: 1}
+  operationNames:
+    - light4j-petstore: [/light4j-case/case/light4j]
+segmentItems:
+  - applicationCode: light4j-petstore
+    segmentSize: nq 0
+    segments:
+      - segmentId: not null
+        spans:
+          - operationName: /light4j-case/case/light4j
+            operationId: 0
+            parentSpanId: -1
+            spanId: 0
+            spanLayer: Http
+            startTime: nq 0
+            endTime: nq 0
+            componentId: 68
+            componentName: ''
+            isError: false
+            spanType: Entry
+            peer: ''
+            peerId: 0
+            tags:
+              - {key: url, value: 'http://localhost:{SERVER_OUTPUT_PORT}/light4j-case/case/light4j'}
+              - {key: http.method, value: GET}
