@@ -1,5 +1,13 @@
+FROM openjdk:8-jdk-alpine
 
-FROM openjdk:8-jre-alpine
-#EXPOSE 8443
-ADD /target/petstore-3.0.1.jar server.jar
-CMD ["/bin/sh","-c","java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -Dlight-4j-config-dir=/config -Dlogback.configurationFile=/config/logback.xml -jar /server.jar"]
+ENV COLLECTOR_SERVER=127.0.0.1:12800
+
+ADD startup.sh /usr/local/skywalking-light4j-scenario/
+ADD petstore.jar /usr/local/skywalking-light4j-scenario/
+
+ADD docker-entrypoint.sh /
+RUN chmod +x /usr/local/skywalking-light4j-scenario/startup.sh && chmod +x /docker-entrypoint.sh
+
+VOLUME /usr/local/skywalking-light4j-scenario/agent
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/local/skywalking-light4j-scenario/startup.sh"]
